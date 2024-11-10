@@ -1,0 +1,22 @@
+# SSL certificates
+ssl/
+*.pem
+*.key
+*.crt
+
+# Environment files
+.env
+.env.*
+
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+
+.scannerwork/
+coverage/
+.sonar/
+
+# Angular cache
+.angular/cache/

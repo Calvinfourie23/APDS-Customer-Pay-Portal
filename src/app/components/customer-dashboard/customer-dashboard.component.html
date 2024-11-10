@@ -1,0 +1,34 @@
+<div class="dashboard-container">
+  <header>
+    <h1>Payment Portal Dashboard</h1>
+  </header>
+  <main>
+    <section class="payment-form-section">
+      <h2>Make a Payment</h2>
+      <app-payment-form (paymentCreated)="onPaymentCreated()"></app-payment-form>
+    </section>
+    <section class="payment-history-section">
+      <h2>Payment History</h2>
+      <table class="payment-table">
+        <thead>
+          <tr>
+            <th>Amount</th>
+            <th>Currency</th>
+            <th>Recipient</th>
+            <th>Status</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let payment of payments">
+            <td>{{ payment.amount | currency:payment.currency:'symbol' }}</td>
+            <td>{{ payment.currency }}</td>
+            <td>{{ payment.recipient }}</td>
+            <td>{{ payment.status }}</td>
+            <td>{{ payment.createdAt | date:'short' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+</div>

@@ -1,0 +1,77 @@
+<div class="dashboard-container">
+  <header>
+    <h1>Employee Dashboard</h1>
+  </header>
+  <main>
+    <section class="employee-management">
+      <h2>Add New Employee</h2>
+      <form (ngSubmit)="addEmployee()" [formGroup]="employeeForm">
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" formControlName="email" required>
+          <div *ngIf="employeeForm.get('email')?.touched && employeeForm.get('email')?.invalid" class="error-message">
+            <span *ngIf="employeeForm.get('email')?.errors?.['required']">Email is required</span>
+            <span *ngIf="employeeForm.get('email')?.errors?.['email'] || employeeForm.get('email')?.errors?.['pattern']">
+              Please enter a valid email address
+            </span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" id="password" formControlName="password" required>
+          <div *ngIf="employeeForm.get('password')?.touched && employeeForm.get('password')?.invalid" class="error-message">
+            <span *ngIf="employeeForm.get('password')?.errors?.['required']">Password is required</span>
+            <span *ngIf="employeeForm.get('password')?.errors?.['minlength']">
+              Password must be at least 8 characters long
+            </span>
+          </div>
+        </div>
+        <button type="submit" [disabled]="!employeeForm.valid">Add Employee</button>
+      </form>
+    </section>
+
+    <section class="customers-section">
+      <h2>Customer List</h2>
+      <table class="customer-table">
+        <thead>
+          <tr>
+            <th>Email</th>
+            <th>Total Transactions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let customer of allCustomers">
+            <td>{{customer.email}}</td>
+            <td>{{customer.transactionCount || 0}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    
+    <section class="all-payments-section">
+      <h2>All Payments</h2>
+      <table class="payment-table">
+        <thead>
+          <tr>
+            <th>Customer</th>
+            <th>Amount</th>
+            <th>Currency</th>
+            <th>Recipient</th>
+            <th>Status</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let payment of allPayments">
+            <td>{{payment.user.email}}</td>
+            <td>{{payment.amount | currency:payment.currency:'symbol'}}</td>
+            <td>{{payment.currency}}</td>
+            <td>{{payment.recipient}}</td>
+            <td>{{payment.status}}</td>
+            <td>{{payment.createdAt | date:'short'}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+</div>

@@ -1,0 +1,19 @@
+<div class="register-container">
+  <h2>Register for Payment Portal</h2>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" id="email" formControlName="email" required class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input type="password" id="password" formControlName="password" required class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="confirmPassword">Confirm Password:</label>
+      <input type="password" id="confirmPassword" formControlName="confirmPassword" required class="form-control">
+    </div>
+    <button type="submit" [disabled]="!registerForm.valid" class="btn btn-primary">Register</button>
+  </form>
+  <p class="login-text">Already have an account? <a routerLink="/login" class="login-link">Login here</a></p>
+</div>
